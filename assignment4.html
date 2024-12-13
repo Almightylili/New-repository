@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3: Transformed Duolingo Owl</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Assignment 4: Exquisite Corpse</h1>
+    </header>
+    <main>
+        <section class="description">
+            <h2>Description</h2>
+            <p>
+                I started by sketching a green Duolingo owl with closed eyes, aiming to give it a bored vibe. The idea was to transform the usual cheerful owl into something more skeletal to represent neglect. 
+                In this new version of the story, the owl realizes it can only thrive when users engage. As it awakens from its slumber, it’s determined to reignite the passion for learning in its users. 
+                The message is clear: neglect leads to decay, but with renewed effort, both the owl and the learners can grow together again.
+            </p>
+        </section>
+        <section id="sketch-container">
+        </section>
+    </main>
+</body>
+<script>
+    // p5.js code starts here
+    function setup() {
+        let canvas = createCanvas(400, 400);
+        canvas.parent("sketch-container");
+        background(220);
+
+        let headX = width / 2;  
+        let headY = height / 5; 
+        let headWidth = 130;
+        let headHeight = 120;
+        let angle = 0;
+
+        drawDogFoot(160, 360); 
+        drawDogFoot(240, 360); 
+        drawOwlHead(headX, headY, headWidth, headHeight);
+    }
+
+    function drawOwlHead(x, y, headWidth, headHeight) {
+        fill(0, 200, 0);  // Duolingo green
+        ellipse(x, y, headWidth, headHeight);
+        
+        let eyeAreaSize = headWidth * 0.6;
+        fill(0, 220, 0);  
+        ellipse(x - headWidth * 0.25, y - headHeight * 0.1, eyeAreaSize, eyeAreaSize);
+        ellipse(x + headWidth * 0.25, y - headHeight * 0.1, eyeAreaSize, eyeAreaSize);
+        
+        let eyeSize = headWidth * 0.4;
+        fill(255);  
+        ellipse(x - headWidth * 0.25, y - headHeight * 0.1, eyeSize, eyeSize);
+        ellipse(x + headWidth * 0.25, y - headHeight * 0.1, eyeSize, eyeSize);
+        
+        stroke(0);
+        strokeWeight(4);
+        noFill();  
+        arc(width / 2 - 30, height / 7, 20, 30, TWO_PI, PI); 
+        arc(width / 2 + 30, height / 7, 20, 30, TWO_PI, PI); 
+        
+        push();
+        fill(255, 204, 0);  
+        let beakWidth = headWidth * 0.2;
+        let beakHeight = headHeight * 0.15;
+        triangle(x - beakWidth / 2, y + headHeight * 0.05, 
+                 x + beakWidth / 2, y + headHeight * 0.05, 
+                 x, y + headHeight * 0.2);
+        pop();
+    }
+
+    function drawDogFoot(x, y) {
+        fill(150, 75, 0); 
+        noStroke();
+        ellipse(x, y - 15, 40, 70);
+
+        fill(100, 50, 0); 
+        ellipse(x - 25, y, 20, 20); 
+        ellipse(x + 25, y, 20, 20); 
+        ellipse(x - 10, y + 15, 20, 20); 
+        ellipse(x + 10, y + 15, 20, 20); 
+
+        fill(0); 
+        ellipse(x - 25, y + 5, 5, 10); 
+        ellipse(x + 25, y + 5, 5, 10); 
+        ellipse(x - 10, y + 20, 5, 10); 
+        ellipse(x + 10, y + 20, 5, 10); 
+    }
+
+    function draw() {
+        stroke(0);
+        strokeWeight(2);
+        noFill(); 
+
+        rect(130, 160, 140, 10);
+        rect(130, 180, 140, 10);
+        rect(130, 200, 140, 10);
+        rect(140, 220, 120, 10);
+        rect(150, 240, 100, 10);
+
+        rect(195, 145, 10, 120);
+
+        let x1 = 150;   
+        let y1 = 270;   
+        let x2 = 250; 
+        let y2 = 270;   
+        let x3 = 230;   
+        let y3 = 300;   
+        let x4 = 170;   
+        let y4 = 300; 
+        beginShape();
+        vertex(x1, y1);  
+        vertex(x2, y2);  
+        vertex(x3, y3);  
+        vertex(x4, y4);  
+        endShape(CLOSE);
+
+        translate(width / 2, height / 2);
+
+        push(); 
+        rotate(PI / 4); 
+        rect(-100, 120, 80, 10); 
+        pop(); 
+
+        push(); 
+        rotate(-PI / 4); 
+        rect(-120, -100, 100, 10); 
+        pop(); 
+
+        push(); 
+        rotate(1 - PI / 2); 
+        rect(20, 100, 80, 10); 
+        pop(); 
+
+        push(); 
+        rotate(PI / 4); 
+        rect(20, -100, 100, 10); 
+        pop(); 
+    }
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zhuoyu Zhang | Critical Computation Lab Portfolio</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Zhuoyu Zhang</h1>
+        <p>Critical Computation Lab Portfolio</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="assignment1.html">Assignment 1</a></li>
+            <li><a href="assignment2.html">Assignment 2</a></li>
+            <li><a href="assignment3.html">Assignment 3</a></li>
+            <li><a href="assignment4.html">Assignment 4</a></li>
+            <li><a href="assignment5.html">Assignment 5</a></li>
+            <li><a href="assignment6.html">Assignment 6</a></li>
+            <li><a href="assignment7.html">Assignment 7</a></li>
+            <li><a href="cv.html" target="_blank">My CV</a></li> 
+        </ul>
+    </nav>
+    <main>
+        <section>
+            <h2>Welcome!</h2>
+            <p>This portfolio showcases the projects completed by Zhuoyu Zhang for the Critical Computation Lab.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Zhuoyu Zhang | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

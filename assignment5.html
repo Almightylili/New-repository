@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 5: Optical Illusion</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Assignment 5: Optical Illusion Inspired by the Kanizsa Triangle</h1>
+    </header>
+    <main>
+        <section class="description">
+            <h2>Description</h2>
+            <p>
+                When working on an optical illusion, I found the Kanizsa triangle a cool reference. It tricks us into seeing a triangle that’s not really there by using "Pac-Man" shapes to form outlines and brightness. 
+                As it rotates, it can even look like flower petals or horseshoes. Inspired by this, I played around with simple shapes and patterns, using the brain's tendency to fill in missing parts. 
+                I kept tweaking the positions, colors, and sizes until the illusion gave off a feeling of hidden shapes or depth—kind of like how the Kanizsa triangle makes you see something that doesn’t exist.
+            </p>
+        </section>
+        <section id="sketch-container">
+        </section>
+    </main>
+</body>
+<script>
+    let angle = 0;
+
+    function setup() {
+        let canvas = createCanvas(400, 400);
+        canvas.parent("sketch-container");
+    }
+
+    function draw() {
+        background(220);
+
+        let colors = [
+            [255, 105, 180],  // Hot Pink
+            [0, 0, 255]       // Blue
+        ];
+
+        let offsetX = [50, 250];  
+        let offsetY = [150, 250]; 
+        noStroke(); 
+
+        for (let group = 0; group < 2; group++) {
+            fill(colors[group]); 
+
+            for (let i = 0; i < 2; i++) {  
+                for (let j = 0; j < 2; j++) {  
+                    push();
+                    translate(offsetX[group] + j * 100, offsetY[i]);
+                    
+                    if (group === 0) {
+                        rotate(HALF_PI * (i * 2 + j + 1) + (j % 2 === 0 ? angle : -angle));
+                    } 
+                    else {
+                        rotate(HALF_PI * (i * 2 + j + 3) + (j % 2 === 0 ? -angle : angle));
+                    }
+                  
+                    arc(0, 0, 80, 80, PI, HALF_PI);
+                    pop();
+                }
+            }
+        }
+
+        angle += 0.005;
+    }
+</script>
+</html>

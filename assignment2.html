@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2: Face Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Assignment 2: Pac-Man Game</h1>
+    </header>
+    <main>
+        <section class="description">
+            <h2>Description</h2>
+            <p>
+                While creating this Pac-Man assignment, I started to have some questions to polish my current game:
+            </p>
+            <p>
+                If I want to make the game over the headline above any other layers, should I arrange it to the 
+                <code>draw</code> function block? But if so, how can I still keep the function of mouse releases 
+                while the <code>draw</code> function runs non-stop?
+            </p>
+        </section>
+        <section id="sketch-container">
+        </section>
+    </main>
+</body>
+<script>
+    // p5.js code starts here
+    let i = 1.85; // upper mouth radian
+    let x = 0.2; // lower mouth radian
+    let speed = 0.007; // speed of mouth opening & closing
+    let img; // ghost image
+    let img2; // game over background
+    let img3; // black background
+    let bgPic;
+    let ghostX;
+    let ghostY;
+    let pacBody;
+
+    function preload() {
+        img = loadImage("ghost.png");
+        img2 = loadImage("gameover.png");
+        img3 = loadImage("bg.png");
+    }
+
+    function setup() {
+        let canvas = createCanvas(400, 400);
+        canvas.parent("sketch-container");
+        ghostX = random(20, 250);
+        ghostY = random(120, 250);
+        bgPic = img3;
+    }
+
+    function draw() {
+        background(bgPic);
+        // Ghost
+        image(img, ghostX, ghostY, img.width / 15, img.height / 15);
+
+        // Pac-Man body
+        fill(255, 255, 0);
+        ellipse(mouseX, mouseY, pacBody, pacBody);
+
+        // Pac-Man mouth
+        fill(0);
+        if (i >= 2 || i <= 1.8) {
+            speed = speed * -1;
+        }
+
+        arc(mouseX, 200, 200, 200, (i += speed) * PI, (x -= speed) * PI, PIE);
+    }
+
+    // Mouse pressed: hits on ghost = game over
+    function mousePressed() {
+        pacBody = random(100, 170);
+        bgPic = img2;
+    }
+
+    // Mouse released: resets the game
+    function mouseReleased() {
+        bgPic = img3;
+    }
+
+    // Key pressed: resets the position of ghost
+    function keyPressed() {
+        ghostX = random(20, 250);
+        ghostY = random(120, 250);
+        image(img, ghostX, ghostY, img.width / 15, img.height / 15);
+    }
+</script>
+</html>

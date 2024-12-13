@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 2: Dynamic Clock</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Assignment 3: Experimental Clock</h1>
+    </header>
+    <main>
+        <section class="description">
+            <h2>Description</h2>
+            <p>
+                My experimental clock brings time to life with dynamic color changes. Instead of just looking at hands moving around a face, the background shifts colors as the hours, minutes, and seconds go by, making it a fun and immersive way to track time. It is more dynamic and fun because it combines the feeling of time with vibrant visuals, changing how I notice time passing from just numbers to an ever-changing display of color.
+            </p>
+        </section>
+        <section id="sketch-container">
+        </section>
+    </main>
+</body>
+<script>
+    // p5.js code starts here
+    let hLength = 50;
+    let mLength = 80;
+    let sLength = 100;
+
+    function setup() {
+        let canvas = createCanvas(400, 400);
+        canvas.parent("sketch-container");
+        angleMode(DEGREES);
+    }
+
+    function draw() {
+        // current time
+        let h = hour();
+        let m = minute();
+        let s = second();
+
+        // background color changes based on time
+        let rColor = map(h % 12, 0, 12, 0, 255); 
+        let gColor = map(m, 0, 60, 0, 255);    
+        let bColor = map(s, 0, 60, 0, 255);      
+        background(rColor, gColor, bColor);
+
+        // translate and rotate clock
+        translate(width / 2, height / 2);
+        rotate(-90);
+        
+        // clock outline
+        strokeWeight(8);
+        fill(255);  
+        stroke(0);
+        ellipse(0, 0, 250, 250);
+        
+        let hAngle = map(h % 12, 0, 12, 0, 360);
+        let mAngle = map(m, 0, 60, 0, 360);
+        let sAngle = map(s, 0, 60, 0, 360);
+
+        // calculate hand positions
+        let hx = hLength * cos(hAngle);
+        let hy = hLength * sin(hAngle);
+        let mx = mLength * cos(mAngle);
+        let my = mLength * sin(mAngle);
+        let sx = sLength * cos(sAngle);
+        let sy = sLength * sin(sAngle);
+
+        // colors changing for clock hands
+        let sColor = map(s, 0, 60, 0, 255);
+        let mColor = map(m, 0, 60, 0, 255);
+        let hColor = map(h % 12, 0, 12, 0, 255);
+
+        // hour hand
+        strokeWeight(6);
+        stroke(hColor, 100, 255);
+        line(0, 0, hx, hy);
+        ellipse(hx, hy, 20, 20);
+
+        // minute hand
+        strokeWeight(4);
+        stroke(100, mColor, 255);
+        line(0, 0, mx, my);
+        ellipse(mx, my, 15, 15);
+
+        // second hand
+        strokeWeight(2);
+        stroke(255, 100, sColor);
+        line(0, 0, sx, sy);
+        ellipse(sx, sy, 10, 10);
+    }
+</script>
+</html>

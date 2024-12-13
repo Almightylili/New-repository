@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 6: Optical Illusion</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Coda:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Assignment 6: Data Portrait</h1>
+    </header>
+    <main>
+        <section class="description">
+            <h2>Description</h2>
+            <p>
+                My data portrait visualizes the number of packages I received during the week of 
+                <strong>Amazon Prime Day</strong> and <strong>Sephora Sales</strong>. 
+                I tracked my package delivery habits, including items I ordered online and gifts from friends and family.
+            </p>
+            <p>
+                The goal was to analyze how my shopping patterns varied throughout the week and to identify 
+                whether certain days were busier than others.
+            </p>
+            
+        </section>
+        <section id="sketch-container">
+        </section>
+    </main>
+    <script>
+      let packages = [];  
+      let slider;         
+      
+      function setup() {
+        let canvas = createCanvas(500, 400);
+        canvas.parent("sketch-container");
+      
+        
+        packages = [1, 3, 5, 2, 0, 3, 2];
+        
+      
+        slider = createSlider(1, 7, 1);
+        slider.position(10, 360);   
+        slider.style('width', '480px');
+        
+        noLoop(); 
+      }
+      
+      function draw() {
+        console.log("test")
+        background(255, 240, 245); 
+        
+        let selectedDay = slider.value(); 
+        
+        textSize(20);
+        fill(50);
+        textAlign(CENTER);
+        
+        text("Packages Received Over 7 Days", width / 2, 30);
+        
+      
+        let colors = ['#FF9999', '#FFCC99', '#FFFF99', '#CCFF99', '#99FF99', '#99FFCC', '#99CCFF'];
+        
+        let barWidth = 40;
+        for (let i = 0; i < packages.length; i++) {
+          let x = i * (barWidth + 20) + 50;   
+          let y = height - packages[i] * 30 - 100;  
+          
+          // the highlight will move to the selected date as you move the slider
+          if (i + 1 === selectedDay) {
+            stroke(255, 0, 0);
+            strokeWeight(4);
+          } else {
+            noStroke();
+          }
+          
+          fill(colors[i % colors.length]);
+          rect(x, y, barWidth, packages[i] * 30);
+          
+          fill(0);
+          noStroke();
+          textSize(12);  
+          text(`Day ${i + 1}`, x + barWidth / 2, height - 50);
+          
+          text(packages[i], x + barWidth / 2, y - 10);
+          
+          // emoji faces will be based on number of packages, representing my mood
+          let emoji = getEmoji(packages[i]);
+          textSize(30);
+          text(emoji, x + barWidth / 2, y - 50);
+        }
+        
+        fill(0);
+        noStroke();
+        textSize(18);
+        text(`Selected Day: ${selectedDay} (Packages: ${packages[selectedDay - 1]})`, width / 2, height - 5);
+      }
+      function mouseReleased() {
+        redraw();
+      }
+      
+      function getEmoji(packages) {
+        if (packages <= 1) {
+          return '😐';   // neutral face for low packages
+        } else if (packages <= 3) {
+          return '🙂';   // slightly happy face
+        } else if (packages <= 5) {
+          return '😊';   // happy face
+        } else {
+          return '😁';   // very happy face for high packages
+        }
+      }
+      </script>
+</body>
